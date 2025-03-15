@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://c5hi66wninwkb" path="res://gui.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://8axewicbs5uk" path="res://menu.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://rcosua42olu5" path="res://lan_menu.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" path="res://menu.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Control"]
 layout_mode = 3

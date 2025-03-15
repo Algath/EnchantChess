@@ -23,6 +23,15 @@ DataHandler="*res://DataHandler.gd"
 
 window/size/mode=2
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="uid://cf55pvkwrh4c1"
+
+[dotnet]
+
+project/assembly_name="Chessy"
+
+[gui]
+
+theme/custom_font="uid://b47e1e1w3ireu"
 
 [dotnet]
 

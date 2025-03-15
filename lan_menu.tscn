@@ -99,6 +99,15 @@ text = "Enter"
 stream = ExtResource("4_71s60")
 autoplay = true
 
+[node name="Back" type="Button" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 56.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 30
+text = "Back"
 [node name="IP" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
