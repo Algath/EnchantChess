@@ -6,11 +6,9 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 		$"VBoxContainer/IP address".visible = false
 		$VBoxContainer/CheckButton.text = "Host"
 		pass
-		#CheckButton.text = "Host"
 	else :
 		$"VBoxContainer/IP address".visible = true
 		$VBoxContainer/CheckButton.text = "Join"
-		#CheckButton.text = "Join"
 		pass
 
 

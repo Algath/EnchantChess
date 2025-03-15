@@ -100,5 +100,15 @@ text = "Enter"
 stream = ExtResource("4_71s60")
 autoplay = true
 
+[node name="Back" type="Button" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 56.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 30
+text = "Back"
+
 [connection signal="toggled" from="VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="VBoxContainer/Enter" to="." method="_on_enter_pressed"]
