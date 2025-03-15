@@ -15,18 +15,18 @@ enum slot_states{NONE, FREE}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	assets.append("res://image/pieces/white_bishop.png")
-	assets.append("res://image/pieces/white_king.png")
-	assets.append("res://image/pieces/white_knight.png")
-	assets.append("res://image/pieces/white_pawn.png")
-	assets.append("res://image/pieces/white_queen.png")
-	assets.append("res://image/pieces/white_rook.png")
-	assets.append("res://image/pieces/black_bishop.png")
-	assets.append("res://image/pieces/black_king.png")
-	assets.append("res://image/pieces/black_knight.png")
-	assets.append("res://image/pieces/black_pawn.png") 
-	assets.append("res://image/pieces/black_queen.png")
-	assets.append("res://image/pieces/black_rook.png")
+	assets.append("res://image/pieces/white_bishop.png") #0
+	assets.append("res://image/pieces/white_king.png") #1
+	assets.append("res://image/pieces/white_knight.png") #2
+	assets.append("res://image/pieces/white_pawn.png") #3
+	assets.append("res://image/pieces/white_queen.png") #4
+	assets.append("res://image/pieces/white_rook.png") #5
+	assets.append("res://image/pieces/black_bishop.png") #6
+	assets.append("res://image/pieces/black_king.png")#7
+	assets.append("res://image/pieces/black_knight.png") #8
+	assets.append("res://image/pieces/black_pawn.png") #9
+	assets.append("res://image/pieces/black_queen.png") #10
+	assets.append("res://image/pieces/black_rook.png")#11
 	
 	
 
