@@ -11,6 +11,8 @@ var fen_dict := {
 	"Q" = PieceNames.white_queen, "R" = PieceNames.white_rook,
 }
 
+enum slot_states{NONE, FREE}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	assets.append("res://image/pieces/white_bishop.png")
