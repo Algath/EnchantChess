@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Chessy"
+config/name="EnchantChess"
 run/main_scene="uid://cqh4ic0uj4xst"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
