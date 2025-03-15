@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5hi66wninwkb"]
+
+[ext_resource type="Script" uid="uid://c77xdjeiu250y" path="res://GUI.gd" id="1_80edf"]
+
+[node name="Gui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_80edf")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0687983, 0.0687983, 0.0687983, 1)
+
+[node name="ChessBoard" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.408329, 0.408329, 0.408329, 1)
+
+[node name="BoardGrid" type="GridContainer" parent="ChessBoard"]
+custom_minimum_size = Vector2(81, 81)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -324.0
+offset_top = -324.0
+offset_right = 324.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 8
+
+[node name="TestButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 826.0
+offset_top = 55.0
+offset_right = 1005.0
+offset_bottom = 128.0
+scale = Vector2(1, 1.01277)
+theme_override_font_sizes/font_size = 40
+text = "test"
+
+[connection signal="pressed" from="TestButton" to="." method="_on_test_button_pressed"]
