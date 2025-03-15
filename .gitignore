@@ -2,3 +2,6 @@
 *.cache
 .godot\editor
 .godot\imported
+/.godot
+icon.svg.import
+image/attack/glace.png.import
