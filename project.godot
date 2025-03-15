@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="EnchantChess"
-run/main_scene="uid://8axewicbs5uk"
-config/features=PackedStringArray("4.4", "Forward Plus")
+run/main_scene="res://menu.tscn"
+config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -32,6 +32,10 @@ project/assembly_name="Chessy"
 [gui]
 
 theme/custom_font="uid://b47e1e1w3ireu"
+
+[dotnet]
+
+project/assembly_name="Chessy"
 
 [input]
 

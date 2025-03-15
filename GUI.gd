@@ -91,7 +91,10 @@ func parse_fen(fen: String) -> void:
 		else:
 			add_piece(DataHandler.fen_dict[i], board_index)
 			board_index += 1
-
+			
 func _on_test_button_pressed() -> void:
 	parse_fen(fen)
+	
 	set_board_filter(1023)
+	
+
