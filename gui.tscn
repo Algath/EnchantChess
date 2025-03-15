@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5hi66wninwkb"]
+[gd_scene load_steps=3 format=3 uid="uid://c5hi66wninwkb"]
 
-[ext_resource type="Script" path="res://GUI.gd" id="1_80edf"]
+[ext_resource type="Script" uid="uid://c77xdjeiu250y" path="res://GUI.gd" id="1_80edf"]
+[ext_resource type="AudioStream" uid="uid://cfoumb745ta8g" path="res://music/SalmonLikeTheFish - Sequoia.mp3" id="2_6lon5"]
 
 [node name="Gui" type="Control"]
 layout_mode = 3
@@ -46,3 +47,6 @@ grow_vertical = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 8
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_6lon5")
