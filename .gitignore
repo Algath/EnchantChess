@@ -1,4 +1,4 @@
 *.import
 *.cache
-.godot\editor\*
-.godot\imported\*
+.godot\editor
+.godot\imported
