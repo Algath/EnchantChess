@@ -28,7 +28,18 @@ func _ready() -> void:
 	piece_array.resize(64)
 	piece_array.fill(0)
 
-
+	if GameData.should_parse_fen:
+		var timer = Timer.new()
+		add_child(timer)
+		timer.wait_time = 0.1  # court délai pour s'assurer que tout est chargé
+		timer.one_shot = true
+		timer.timeout.connect(func(): 
+			parse_fen(GameData.current_fen)
+			GameData.should_parse_fen = false
+			set_board_filter(1023)
+			timer.queue_free()
+		)
+		timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

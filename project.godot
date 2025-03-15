@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DataHandler="*res://DataHandler.gd"
+GameData="*res://gameData.gd"
 
 [display]
 

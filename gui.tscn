@@ -31,6 +31,7 @@ grow_vertical = 2
 color = Color(0.408329, 0.408329, 0.408329, 1)
 
 [node name="BoardGrid" type="GridContainer" parent="ChessBoard"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(81, 81)
 layout_mode = 1
 anchors_preset = 8

@@ -86,5 +86,6 @@ playback_type = 1
 parameters/looping = true
 
 [connection signal="pressed" from="ColorRect/VBoxContainer/LaunchLAN" to="." method="_on_launch_lan_pressed"]
+[connection signal="gui_input" from="ColorRect/VBoxContainer/LaunchLocal" to="." method="_on_launch_local_gui_input"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/LaunchLocal" to="." method="_on_launch_local_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/LaunchBot" to="." method="_on_launch_bot_pressed"]
