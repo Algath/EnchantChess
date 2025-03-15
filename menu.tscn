@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://8axewicbs5uk"]
+[gd_scene load_steps=5 format=3 uid="uid://8axewicbs5uk"]
 
+[ext_resource type="Script" uid="uid://b5h72ugm6nack" path="res://menu.gd" id="1_4hy44"]
 [ext_resource type="FontFile" uid="uid://b47e1e1w3ireu" path="res://Cretino.otf" id="1_ouk20"]
-[ext_resource type="Texture2D" uid="uid://btvkn8sjs24ed" path="res://image/icon.png" id="2_mae5d"]
+[ext_resource type="Texture2D" uid="uid://2euc2gulpj8h" path="res://image/icon.png" id="2_mae5d"]
 [ext_resource type="AudioStream" uid="uid://cjeacjs0g26y2" path="res://music/Lobo Loco - Organ come to Late (ID 2125).mp3" id="3_mae5d"]
 
 [node name="Menu" type="Control"]
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_4hy44")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -80,3 +82,7 @@ text = "Play against Bot
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_mae5d")
 autoplay = true
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/LaunchLAN" to="." method="_on_launch_lan_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/LaunchLocal" to="." method="_on_launch_local_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/LaunchBot" to="." method="_on_launch_bot_pressed"]

@@ -9,6 +9,8 @@ var grid_array := []
 var piece_array := []
 var icon_offset := Vector2(40.5, 40.5)
 var fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
+var piece_selected = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in range(64):
@@ -37,6 +39,24 @@ func create_slot():
 	new_slot.slot_ID = grid_array.size()
 	board_grid.add_child(new_slot)
 	grid_array.push_back(new_slot)
+	new_slot.slot_clicked.connect(_on_slot_clicked)
+	
+func _on_slot_clicked(slot)->void:
+	if not piece_selected:
+		return
+	move_piece(piece_selected, slot.slot_ID)
+	piece_selected = null
+
+func  move_piece(piece, location) -> void:
+	if piece_array[location]:
+		piece_array[location].queue_free()
+		piece_array[location] = 0
+		
+	var tween = get_tree().create_tween()
+	tween.tween_property(piece, "global_position", grid_array[location].global_position + icon_offset, 0.2)
+	piece_array[piece.slot_ID] = 0 #delete place from original spot
+	piece_array[location] = piece #move it to the new location
+	piece.slot_ID = location
 	
 func add_piece(piece_type, location) -> void:
 	var new_piece = piece_scene.instantiate()
@@ -46,6 +66,20 @@ func add_piece(piece_type, location) -> void:
 	new_piece.global_position = grid_array[location].global_position + icon_offset
 	piece_array[location] = new_piece
 	new_piece.slot_ID = location
+	new_piece.piece_selected.connect(_on_piece_selected)
+	
+func _on_piece_selected(piece):
+	if not piece_selected:
+		piece_selected = piece
+	else:
+		_on_slot_clicked(grid_array[piece.slot_ID])
+
+func set_board_filter(bitmap: int):
+	for i in range(64):
+		if bitmap & 1:
+			grid_array[i].set_filter(DataHandler.slot_states.FREE)
+		bitmap = bitmap >> 1
+	
 
 func parse_fen(fen: String) -> void:
 	var boardstate = fen.split(" ")
@@ -93,3 +127,4 @@ func _on_connected() -> void:
 	
 func _on_connection_failed() -> void:
 	print("Connection failed !")
+	set_board_filter(1023)
