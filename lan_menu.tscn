@@ -84,7 +84,7 @@ text = "Join"
 [node name="Port" type="TextEdit" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-placeholder_text = "Port"
+placeholder_text = "Port : 7777"
 
 [node name="IP address" type="TextEdit" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
