@@ -97,4 +97,3 @@ func _on_test_button_pressed() -> void:
 	
 	set_board_filter(1023)
 	
-
