@@ -6,6 +6,7 @@ var slot_ID := -1
 var type : int
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -21,3 +22,4 @@ func load_icon(piece_name) -> void:
 func _on_icon_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_left"):
 		emit_signal("piece_selected", self)
+		
