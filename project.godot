@@ -33,10 +33,6 @@ project/assembly_name="Chessy"
 
 theme/custom_font="uid://b47e1e1w3ireu"
 
-[dotnet]
-
-project/assembly_name="Chessy"
-
 [input]
 
 mouse_left={
