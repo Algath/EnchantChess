@@ -95,36 +95,6 @@ func parse_fen(fen: String) -> void:
 func _on_test_button_pressed() -> void:
 	parse_fen(fen)
 	
-	
-func _createServer() -> void:
-	
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(7777, 2)
-	multiplayer.multiplayer_peer = peer
-	
-	var ip
-	for address in IP.get_local_addresses():
-		if (address.split('.').size() == 4):
-			ip=address
-	
-	print("Server started on port 7777 with IP " + ip)
-	
-	$IP.text = "IP : " + ip
-	
-	
-func _connect() -> void:
-	
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_client("IP_ADDRESS", 7777)
-	multiplayer.multiplayer_peer = peer
-	
-	multiplayer.connected_to_server.connect(_on_connected)
-	multiplayer.connection_failed.connect(_on_connection_failed)
-	
-	
-func _on_connected() -> void:
-	print("Connected !")
-	
-func _on_connection_failed() -> void:
-	print("Connection failed !")
 	set_board_filter(1023)
+	
+
