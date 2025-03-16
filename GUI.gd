@@ -97,28 +97,28 @@ func _on_piece_selected(piece):
 	else:
 		piece_selected = piece
 		var whiteBoard = bitboard.get_white_bitboard()
-		var BlackBoard = bitboard.get_black_bitboard()
+		var blackBoard = bitboard.get_black_bitboard()
 		var isBlack := true
 		var function_to_call : String
 		var piece_type = piece.type % 6
 		if piece.type<6: isBlack = false 
 		match piece_type:
 			0:
-				function_to_call = "Bishop_Path"
+				function_to_call = "bishop_path"
 			1:
-				function_to_call = "King_Path"
+				function_to_call = "king_path"
 			2:
-				function_to_call = "Knight_Path"
+				function_to_call = "knight_path"
 			3:
-				function_to_call = "Pawn_Path"
+				function_to_call = "pawn_path"
 			4:
-				function_to_call = "Queen_Path"
+				function_to_call = "queen_path"
 			5:
-				function_to_call = "Rook_Path"
+				function_to_call = "rook_path"
 		
 		# Récupérer les bitboards appropriés selon la couleur
-		var self_board = BlackBoard if isBlack else whiteBoard
-		var enemy_board = whiteBoard if !isBlack else BlackBoard
+		var self_board = blackBoard if isBlack else whiteBoard
+		var enemy_board = whiteBoard if !isBlack else blackBoard
 		
 		# Appeler la bonne fonction avec les paramètres appropriés
 		var valid_moves = generate_path.call(function_to_call.to_lower(), 63-piece.slot_ID, self_board, enemy_board, isBlack)

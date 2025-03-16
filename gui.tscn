@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5hi66wninwkb"]
 
 [ext_resource type="Script" uid="uid://c77xdjeiu250y" path="res://GUI.gd" id="1_80edf"]
-[ext_resource type="AudioStream" uid="uid://d084ptuoh3y87" path="res://music/SalmonLikeTheFish - Sequoia.mp3" id="2_6lon5"]
+[ext_resource type="AudioStream" uid="uid://cfoumb745ta8g" path="res://music/SalmonLikeTheFish - Sequoia.mp3" id="2_6lon5"]
 [ext_resource type="Script" uid="uid://bsembka33x0kp" path="res://bitboard.gd" id="3_q8o8l"]
 [ext_resource type="Script" uid="uid://crybgcmw4ssdk" path="res://GeneratePath.gd" id="4_cor1f"]
 
