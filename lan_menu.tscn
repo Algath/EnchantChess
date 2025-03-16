@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://rcosua42olu5"]
 
-[ext_resource type="Script" uid="uid://bsw7ktjee0heh" path="res://lan_menu.gd" id="1_7ieqw"]
-[ext_resource type="FontFile" uid="uid://b47e1e1w3ireu" path="res://font/Cretino.otf" id="1_fbu6r"]
-[ext_resource type="Texture2D" uid="uid://2euc2gulpj8h" path="res://image/icon.png" id="2_7ieqw"]
-[ext_resource type="AudioStream" uid="uid://cjeacjs0g26y2" path="res://music/Lobo Loco - Organ come to Late (ID 2125).mp3" id="4_71s60"]
+[ext_resource type="Script" uid="uid://w06kfkmbuesh" path="res://lan_menu.gd" id="1_7ieqw"]
+[ext_resource type="FontFile" uid="uid://vnrhj77b4s7u" path="res://font/Cretino.otf" id="1_fbu6r"]
+[ext_resource type="Texture2D" uid="uid://bjwljgal07l25" path="res://image/icon.png" id="2_7ieqw"]
+[ext_resource type="AudioStream" uid="uid://cebaajoct4klc" path="res://music/Lobo Loco - Organ come to Late (ID 2125).mp3" id="4_71s60"]
 
 [node name="LanMenu" type="Control"]
 layout_mode = 3
