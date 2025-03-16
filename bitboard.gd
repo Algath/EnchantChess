@@ -149,31 +149,31 @@ func generate_move_set(is_black_move):
 					move_set.append(new_move)
 	
 	# King
-	#for i in range(64):
-		#if (search_list[1] & (1 << i)) != 0:
-			#var current_moves = path_generator.king_path(i, self_board, enemy_board, is_black_move)
-			#for j in range(64):
-				#if (current_moves & (1 << j)) != 0:
-					#var new_move = Move.new(i, j)
-					#move_set.append(new_move)
+	for i in range(64):
+		if (search_list[1] & (1 << i)) != 0:
+			var current_moves = path_generator.king_path(i, self_board, enemy_board, is_black_move)
+			for j in range(64):
+				if (current_moves & (1 << j)) != 0:
+					var new_move = Move.new(i, j)
+					move_set.append(new_move)
 	
 	# Knight
-	#for i in range(64):
-		#if (search_list[2] & (1 << i)) != 0:
-			#var current_moves = path_generator.knight_path(i, self_board, enemy_board, is_black_move)
-			#for j in range(64):
-				#if (current_moves & (1 << j)) != 0:
-					#var new_move = Move.new(i, j)
-					#move_set.append(new_move)
+	for i in range(64):
+		if (search_list[2] & (1 << i)) != 0:
+			var current_moves = path_generator.knight_path(i, self_board, enemy_board, is_black_move)
+			for j in range(64):
+				if (current_moves & (1 << j)) != 0:
+					var new_move = Move.new(i, j)
+					move_set.append(new_move)
 	
 	# Pawn
-	#for i in range(64):
-		#if (search_list[3] & (1 << i)) != 0:
-			#var current_moves = path_generator.pawn_path(i, self_board, enemy_board, is_black_move)
-			#for j in range(64):
-				#if (current_moves & (1 << j)) != 0:
-					#var new_move = Move.new(i, j)
-					#move_set.append(new_move)
+	for i in range(64):
+		if (search_list[3] & (1 << i)) != 0:
+			var current_moves = path_generator.pawn_path(i, self_board, enemy_board, is_black_move)
+			for j in range(64):
+				if (current_moves & (1 << j)) != 0:
+					var new_move = Move.new(i, j)
+					move_set.append(new_move)
 	
 	# Queen
 	for i in range(64):

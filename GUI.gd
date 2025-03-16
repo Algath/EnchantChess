@@ -66,14 +66,20 @@ func _on_slot_clicked(slot)->void:
 
 func  move_piece(piece, location) -> void:
 	if piece_array[location]:
+		remove_from_bitboard(piece_array[location])
 		piece_array[location].queue_free()
 		piece_array[location] = 0
 		
+	remove_from_bitboard(piece)	
 	var tween = get_tree().create_tween()
 	tween.tween_property(piece, "global_position", grid_array[location].global_position + icon_offset, 0.2)
 	piece_array[piece.slot_ID] = 0 #delete place from original spot
 	piece_array[location] = piece #move it to the new location
 	piece.slot_ID = location
+	bitboard.add_piece(63-location, piece.type)
+	
+func remove_from_bitboard(piece):
+	bitboard.remove_piece(63-piece.slot_ID, piece.type)
 	
 func add_piece(piece_type, location) -> void:
 	var new_piece = piece_scene.instantiate()
@@ -92,8 +98,31 @@ func _on_piece_selected(piece):
 		piece_selected = piece
 		var whiteBoard = bitboard.get_white_bitboard()
 		var BlackBoard = bitboard.get_black_bitboard()
-		var isBlack = true
-		set_board_filter(generate_path.rook_path(63-piece.slot_ID, BlackBoard, whiteBoard, isBlack))
+		var isBlack := true
+		var function_to_call : String
+		var piece_type = piece.type % 6
+		if piece.type<6: isBlack = false 
+		match piece_type:
+			0:
+				function_to_call = "Bishop_Path"
+			1:
+				function_to_call = "King_Path"
+			2:
+				function_to_call = "Knight_Path"
+			3:
+				function_to_call = "Pawn_Path"
+			4:
+				function_to_call = "Queen_Path"
+			5:
+				function_to_call = "Rook_Path"
+		
+		# Récupérer les bitboards appropriés selon la couleur
+		var self_board = BlackBoard if isBlack else whiteBoard
+		var enemy_board = whiteBoard if !isBlack else BlackBoard
+		
+		# Appeler la bonne fonction avec les paramètres appropriés
+		var valid_moves = generate_path.call(function_to_call.to_lower(), 63-piece.slot_ID, self_board, enemy_board, isBlack)
+		set_board_filter(valid_moves)
 
 func set_board_filter(bitmap: int):
 	#print("Bitboard value: ", bitmap)

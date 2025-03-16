@@ -65,7 +65,7 @@ func knight_path(knight_position, self_board, enemy_board, is_black):
 		knight_mask &= ~0x303030303030303
 	
 	if knight_position % 8 < 2:
-		knight_mask &= ~0xC0C0C0C0C0C0C0C0
+		knight_mask &= ~0x4040404040404040
 	
 	knight_mask ^= self_board & knight_mask
 	return knight_mask
@@ -139,7 +139,7 @@ func king_path(king_position, self_board, enemy_board, is_black):
 		king_mask &= ~0x303030303030303
 	
 	if king_position % 8 < 1:
-		king_mask &= ~0xC0C0C0C0C0C0C0C0
+		king_mask &= ~0x4040404040404040
 	
 	king_mask ^= self_board & king_mask
 	return king_mask
@@ -191,7 +191,7 @@ func pawn_path(pawn_position, self_board, enemy_board, is_black):
 		attack_mask &= ~0x303030303030303
 	
 	if pawn_position % 8 < 1:
-		attack_mask &= ~0xC0C0C0C0C0C0C0C0
+		attack_mask &= ~0x4040404040404040
 	
 	attack_mask &= enemy_board
 	pawn_mask ^= pawn_mask & (self_board | enemy_board)
