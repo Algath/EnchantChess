@@ -107,7 +107,5 @@ func _on_test_button_pressed(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		#parse_fen(fen)
 		bitboard.init_bit_board(fen)
-		set_board_filter(DataHandler.fen_dict[0])
-		
-		
+		#set_board_filter(DataHandler.fen_dict[0])
 	
