@@ -61,21 +61,23 @@ func init_bit_board(fen):
 	
 	for i in fen_split[0]:
 		if i == '/':
-			rank -= 1
-			file = 0
+			#rank -= 1
+			#file = 0
 			continue
 		
 		if i.is_valid_int():
-			file += int(i)
+			var shiftAmount = int(i)
+			left_shift(shiftAmount)
 			continue
 		
+		left_shift(1)
 		var position = rank * 8 + file
 		var piece_type = DataHandler.fen_dict[i]
 		
 		if is_black_piece(piece_type):
-			black_pieces[get_piece_index(piece_type)] |= 1 << position
+			black_pieces[get_piece_index(piece_type)] |= 1 
 		else:
-			white_pieces[get_piece_index(piece_type)] |= 1 << position
+			white_pieces[get_piece_index(piece_type)] |= 1 
 		
 		file += 1
 	
@@ -89,7 +91,7 @@ func left_shift(shift_amount):
 
 func get_bitboard():
 	#print(black_pieces[4])
-	return black_pieces[1]  # king and queen inversed, but not the rest of pieces, don't know why
+	return black_pieces[4]  # king and queen inversed, but not the rest of pieces, don't know why
 
 func remove_piece(location, piece_type):
 	if is_black_piece(piece_type):
