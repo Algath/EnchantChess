@@ -1,5 +1,7 @@
 extends Node
 
+@onready var generate_path = preload("res://GeneratePath.gd")
+
 # Piece arrays using ulongs (64-bit integers)
 var white_pieces = [0, 0, 0, 0, 0, 0]  # bishop, king, knight, pawn, queen, rook
 var black_pieces = [0, 0, 0, 0, 0, 0]  # bishop, king, knight, pawn, queen, rook
@@ -56,13 +58,9 @@ func is_black_piece(piece_name):
 func init_bit_board(fen):
 	clear_bitboard()
 	var fen_split = fen.split(" ")
-	var rank = 7
-	var file = 0
 	
 	for i in fen_split[0]:
 		if i == '/':
-			#rank -= 1
-			#file = 0
 			continue
 		
 		if i.is_valid_int():
@@ -71,15 +69,12 @@ func init_bit_board(fen):
 			continue
 		
 		left_shift(1)
-		var position = rank * 8 + file
 		var piece_type = DataHandler.fen_dict[i]
 		
 		if is_black_piece(piece_type):
 			black_pieces[get_piece_index(piece_type)] |= 1 
 		else:
 			white_pieces[get_piece_index(piece_type)] |= 1 
-		
-		file += 1
 	
 	print("Bitboard init successfully")
 
@@ -128,32 +123,32 @@ func make_move(move, is_black_move):
 			from_list[i] &= ~from_bit  # Remove piece from original position
 			from_list[i] |= to_bit     # Add piece to new position
 
-#func generate_move_set(is_black_move):
-	#var search_list
-	#var self_board
-	#var enemy_board
-	#var move_set = []
-	#var path_generator = GeneratePath.new()
-	#
-	#if is_black_move:
-		#self_board = get_black_bitboard()
-		#enemy_board = get_white_bitboard()
-		#search_list = black_pieces
-	#else:
-		#self_board = get_white_bitboard()
-		#enemy_board = get_black_bitboard()
-		#search_list = white_pieces
-	#
-	## Bishop
-	#for i in range(64):
-		#if (search_list[0] & (1 << i)) != 0:
-			#var current_moves = path_generator.bishop_path(i, self_board, enemy_board, is_black_move)
-			#for j in range(64):
-				#if (current_moves & (1 << j)) != 0:
-					#var new_move = Move.new(i, j)
-					#move_set.append(new_move)
-	#
-	## King
+func generate_move_set(is_black_move):
+	var search_list
+	var self_board
+	var enemy_board
+	var move_set = []
+	var path_generator = generate_path.new()
+	
+	if is_black_move:
+		self_board = get_black_bitboard()
+		enemy_board = get_white_bitboard()
+		search_list = black_pieces
+	else:
+		self_board = get_white_bitboard()
+		enemy_board = get_black_bitboard()
+		search_list = white_pieces
+	
+	# Bishop
+	for i in range(64):
+		if (search_list[0] & (1 << i)) != 0:
+			var current_moves = path_generator.bishop_path(i, self_board, enemy_board, is_black_move)
+			for j in range(64):
+				if (current_moves & (1 << j)) != 0:
+					var new_move = Move.new(i, j)
+					move_set.append(new_move)
+	
+	# King
 	#for i in range(64):
 		#if (search_list[1] & (1 << i)) != 0:
 			#var current_moves = path_generator.king_path(i, self_board, enemy_board, is_black_move)
@@ -161,8 +156,8 @@ func make_move(move, is_black_move):
 				#if (current_moves & (1 << j)) != 0:
 					#var new_move = Move.new(i, j)
 					#move_set.append(new_move)
-	#
-	## Knight
+	
+	# Knight
 	#for i in range(64):
 		#if (search_list[2] & (1 << i)) != 0:
 			#var current_moves = path_generator.knight_path(i, self_board, enemy_board, is_black_move)
@@ -170,8 +165,8 @@ func make_move(move, is_black_move):
 				#if (current_moves & (1 << j)) != 0:
 					#var new_move = Move.new(i, j)
 					#move_set.append(new_move)
-	#
-	## Pawn
+	
+	# Pawn
 	#for i in range(64):
 		#if (search_list[3] & (1 << i)) != 0:
 			#var current_moves = path_generator.pawn_path(i, self_board, enemy_board, is_black_move)
@@ -179,23 +174,22 @@ func make_move(move, is_black_move):
 				#if (current_moves & (1 << j)) != 0:
 					#var new_move = Move.new(i, j)
 					#move_set.append(new_move)
-	#
-	## Queen
-	#for i in range(64):
-		#if (search_list[4] & (1 << i)) != 0:
-			#var current_moves = path_generator.queen_path(i, self_board, enemy_board, is_black_move)
-			#for j in range(64):
-				#if (current_moves & (1 << j)) != 0:
-					#var new_move = Move.new(i, j)
-					#move_set.append(new_move)
-	#
-	## Rook
-	#for i in range(64):
-		#if (search_list[5] & (1 << i)) != 0:
-			#var current_moves = path_generator.rook_path(i, self_board, enemy_board, is_black_move)
-			#for j in range(64):
-				#if (current_moves & (1 << j)) != 0:
-					#var new_move = Move.new(i, j)
-					#move_set.append(new_move)
-	#
-	#return move_set
+	
+	# Queen
+	for i in range(64):
+		if (search_list[4] & (1 << i)) != 0:
+			var current_moves = path_generator.queen_path(i, self_board, enemy_board, is_black_move)
+			for j in range(64):
+				if (current_moves & (1 << j)) != 0:
+					var new_move = Move.new(i, j)
+					move_set.append(new_move)
+	
+	# Rook
+	for i in range(64):
+		if (search_list[5] & (1 << i)) != 0:
+			var current_moves = path_generator.rook_path(i, self_board, enemy_board, is_black_move)
+			for j in range(64):
+				if (current_moves & (1 << j)) != 0:
+					var new_move = Move.new(i, j)
+					move_set.append(new_move)
+	return move_set

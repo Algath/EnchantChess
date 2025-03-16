@@ -5,11 +5,12 @@ extends Control
 @onready var piece_scene = preload("res://piece.tscn")
 @onready var chess_board = $ChessBoard
 @onready var bitboard = $BitBoard
+@onready var generate_path = $GeneratePath
 
 var grid_array := []
 var piece_array := []
 var icon_offset := Vector2(40.5, 40.5)
-var fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+var fen = "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
 
 var piece_selected = null
 # Called when the node enters the scene tree for the first time.
@@ -44,7 +45,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("mouse_right") and piece_selected:
+		piece_selected = null
+		clear_board_filter()
 
 func create_slot():
 	var new_slot = slot_scene.instantiate()
@@ -56,7 +59,9 @@ func create_slot():
 func _on_slot_clicked(slot)->void:
 	if not piece_selected:
 		return
+	if slot.state != DataHandler.slot_states.FREE: return
 	move_piece(piece_selected, slot.slot_ID)
+	clear_board_filter()
 	piece_selected = null
 
 func  move_piece(piece, location) -> void:
@@ -81,18 +86,26 @@ func add_piece(piece_type, location) -> void:
 	new_piece.piece_selected.connect(_on_piece_selected)
 	
 func _on_piece_selected(piece):
-	if not piece_selected:
-		piece_selected = piece
-	else:
+	if piece_selected:
 		_on_slot_clicked(grid_array[piece.slot_ID])
+	else:
+		piece_selected = piece
+		var whiteBoard = bitboard.get_white_bitboard()
+		var BlackBoard = bitboard.get_black_bitboard()
+		var isBlack = true
+		set_board_filter(generate_path.rook_path(63-piece.slot_ID, BlackBoard, whiteBoard, isBlack))
 
 func set_board_filter(bitmap: int):
-	print("Bitboard value: ", bitmap)
+	#print("Bitboard value: ", bitmap)
 	for i in range(64):
 		if bitmap & 1:
-			print("Bit ", i, " is set, highlighting slot ", 63-i)
+			#print("Bit ", i, " is set, highlighting slot ", 63-i)
 			grid_array[63-i].set_filter(DataHandler.slot_states.FREE)
 		bitmap = bitmap >> 1
+
+func clear_board_filter():
+	for i in grid_array:
+		i.set_filter()
 
 func parse_fen(fen: String) -> void:
 	var boardstate = fen.split(" ")
@@ -109,6 +122,6 @@ func _on_test_button_pressed(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		#parse_fen(fen)
 		bitboard.init_bit_board(fen)
-		set_board_filter(bitboard.get_bitboard())
+		set_board_filter(bitboard.get_black_bitboard())
 		#print(bitboard.get_bitboard())
 	
