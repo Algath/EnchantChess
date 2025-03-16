@@ -37,7 +37,7 @@ func _ready() -> void:
 		timer.timeout.connect(func(): 
 			parse_fen(GameData.current_fen)
 			GameData.should_parse_fen = false
-			set_board_filter(1023)
+			set_board_filter(bitboard.get_bitboard())
 			timer.queue_free()
 		)
 		timer.start()
@@ -87,9 +87,11 @@ func _on_piece_selected(piece):
 		_on_slot_clicked(grid_array[piece.slot_ID])
 
 func set_board_filter(bitmap: int):
+	print("Bitboard value: ", bitmap)
 	for i in range(64):
 		if bitmap & 1:
-			grid_array[i].set_filter(DataHandler.slot_states.FREE)
+			print("Bit ", i, " is set, highlighting slot ", 63-i)
+			grid_array[63-i].set_filter(DataHandler.slot_states.FREE)
 		bitmap = bitmap >> 1
 
 func parse_fen(fen: String) -> void:
@@ -107,5 +109,6 @@ func _on_test_button_pressed(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		#parse_fen(fen)
 		bitboard.init_bit_board(fen)
-		#set_board_filter(DataHandler.fen_dict[0])
+		set_board_filter(bitboard.get_bitboard())
+		#print(bitboard.get_bitboard())
 	

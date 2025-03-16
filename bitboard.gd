@@ -88,7 +88,8 @@ func left_shift(shift_amount):
 		white_pieces[piece] <<= shift_amount
 
 func get_bitboard():
-	return black_pieces[1]  # Returns the black king bitboard
+	#print(black_pieces[4])
+	return black_pieces[1]  # king and queen inversed, but not the rest of pieces, don't know why
 
 func remove_piece(location, piece_type):
 	if is_black_piece(piece_type):
