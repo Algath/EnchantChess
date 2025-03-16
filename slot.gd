@@ -1,6 +1,7 @@
 extends ColorRect
 
 @onready var filter_path = $Filter
+
 var slot_ID := -1
 signal slot_clicked(slot)
 var state = DataHandler.slot_states.NONE
@@ -24,6 +25,8 @@ func set_filter(color = DataHandler.slot_states.NONE):
 			filter_path.color = Color(0,0,0,0)
 		DataHandler.slot_states.FREE:
 			filter_path.color = Color(0.3,0,0,0.3)
+		DataHandler.slot_states.CHECK:
+			filter_path.color = Color(0,0,0.6,0.9)
 	pass
 
 func _on_filter_gui_input(event: InputEvent) -> void:

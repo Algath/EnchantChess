@@ -4,6 +4,7 @@ extends Control
 @onready var board_grid = $ChessBoard/BoardGrid
 @onready var piece_scene = preload("res://piece.tscn")
 @onready var chess_board = $ChessBoard
+@onready var bitboard = $BitBoard
 
 var grid_array := []
 var piece_array := []
@@ -90,7 +91,6 @@ func set_board_filter(bitmap: int):
 		if bitmap & 1:
 			grid_array[i].set_filter(DataHandler.slot_states.FREE)
 		bitmap = bitmap >> 1
-	
 
 func parse_fen(fen: String) -> void:
 	var boardstate = fen.split(" ")
@@ -103,8 +103,11 @@ func parse_fen(fen: String) -> void:
 			add_piece(DataHandler.fen_dict[i], board_index)
 			board_index += 1
 			
-func _on_test_button_pressed() -> void:
-	parse_fen(fen)
-	
-	set_board_filter(1023)
+func _on_test_button_pressed(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		#parse_fen(fen)
+		bitboard.init_bit_board(fen)
+		set_board_filter(DataHandler.fen_dict[0])
+		
+		
 	
